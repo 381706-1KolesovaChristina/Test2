@@ -1,0 +1,19 @@
+.nav {
+    grid-area: n;
+    background-color: rgb(118, 235, 108);
+}
+
+.item {
+    color: brown;
+
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    text-align: center;
+
+    padding: 10px 30px;
+}
+
+.item.active {
+    color: blueviolet;
+}
