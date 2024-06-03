@@ -4,7 +4,7 @@
 }
 
 .item {
-    color: brown;
+    color: rgb(234, 255, 228);
 
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,6 +14,12 @@
     padding: 10px 30px;
 }
 
-.item.active {
-    color: blueviolet;
+/*.item*/
+/*.active {
+    color: rgb(255, 150, 195);
+}*/
+
+.item a:active,
+.item a:focus {
+    color: rgb(255, 150, 195);
 }
