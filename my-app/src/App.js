@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 
 
-const App = () => {
+const App = (props) => {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -18,8 +18,8 @@ const App = () => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='/profile' element={<Profile />} />
-            <Route /*exact*/ path='/dialogs/*' element={<Dialogs />} />
+            <Route path='/profile' element={<Profile postData={props.appState.postData} />} />
+            <Route /*exact*/ path='/dialogs/*' element={<Dialogs dialogsData={props.appState.dialogsData} messagesData={props.appState.messagesData} />} />
           </Routes>
         </div>
       </div>
