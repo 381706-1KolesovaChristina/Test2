@@ -1,0 +1,14 @@
+.active {
+    color: rgb(231, 210, 210);
+}
+
+.dialog a {
+    text-decoration: none;
+}
+
+.dialog img {
+    height: 40px;
+    width: 40px;
+
+    border-radius: 20px;
+}

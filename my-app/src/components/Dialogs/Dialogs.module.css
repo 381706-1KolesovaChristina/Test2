@@ -7,8 +7,13 @@
     padding: 10px;
 }
 
-.dialogsItems .active {
-    color: rgb(233, 61, 61);
+/* .dialogsItems .active,
+.dialogsItems .focuse {
+    color: rgb(231, 210, 210);
+} */
+
+.active {
+    color: rgb(231, 210, 210);
 }
 
 .dialog {}

@@ -18,8 +18,12 @@
 /*.active {
     color: rgb(255, 150, 195);
 }*/
-
+/* 
 .item a:active,
 .item a:focus {
     color: rgb(255, 150, 195);
+} */
+
+.item .active {
+    color: rgb(216, 202, 230);
 }
