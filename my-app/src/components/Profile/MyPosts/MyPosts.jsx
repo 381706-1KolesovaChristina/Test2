@@ -1,5 +1,6 @@
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
+import React from 'react'
 
 // let postData = [
 //     { id: 1, message: 'hi', likesCount: 11 },
@@ -11,12 +12,28 @@ import Post from './Post/Post'
 
 const MyPosts = (props) => {
     let postsElement = props.postData.map(post => <Post message={post.message} likesCount={post.likesCount} />)
+    let newPostElement = React.createRef();
+
+    let addPost = () => {
+        // let text = newPostElement.current.value;
+        props.addPost();
+        // props.updateNewPostText('');
+    };
+
+    let onPostChange = () => {
+        let text = newPostElement.current.value;
+        props.updateNewPostText(text);
+    }
+
     return (
         <div>
             My posts
             <div>
-                <textarea name="" id=""></textarea>
-                <button>AddPost</button>
+                <textarea
+                    onChange={onPostChange}
+                    ref={newPostElement}
+                    value={props.newPostText} />
+                <button onClick={addPost}>AddPost</button>
             </div>
             <div className={s.posts}>
                 {/* <Post message={postData[0].message} likesCount={postData[0].likesCount} />
