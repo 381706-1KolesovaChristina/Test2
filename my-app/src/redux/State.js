@@ -1,61 +1,136 @@
-import renderEntireTree from "../render";
+// import renderEntireTree from "../render";
 
-let state = {
-    profilePage: {
-        postData: [
-            { id: 1, message: 'hi', likesCount: 11 },
-            { id: 2, message: 'tooo', likesCount: 12 },
-            { id: 3, message: 'one', likesCount: 1 },
-        ],
-        newPostText: 'hihihi'
+let store = {
+    _state: {
+        profilePage: {
+            postData: [
+                { id: 1, message: 'hi', likesCount: 11 },
+                { id: 2, message: 'tooo', likesCount: 12 },
+                { id: 3, message: 'one', likesCount: 1 },
+            ],
+            newPostText: 'hihihi'
+        },
+        dialogsPage: {
+            dialogsData: [
+                { id: 1, name: "Dimych" },
+                { id: 2, name: "Andrey" },
+                { id: 3, name: "Sasha'" },
+                { id: 4, name: "Kolya'" },
+                { id: 5, name: "Nastya" },
+                { id: 6, name: "Dimych" },
+            ],
+            messagesData: [
+                { id: 1, message: 'hi' },
+                { id: 2, message: 'hi' },
+                { id: 3, message: 'hi' },
+                { id: 4, message: 'hi />' },
+                { id: 5, message: 'how are you' },
+                { id: 6, message: 'lol />' }
+            ]
+        },
+        sidebar: {
+            friendsList: [
+                { id: 1, name: "Dimych" },
+                { id: 2, name: "Andrey" },
+                { id: 3, name: "Sasha'" },
+            ],
+            friendsData: []
+        }
     },
-    dialogsPage: {
-        dialogsData: [
-            { id: 1, name: "Dimych" },
-            { id: 2, name: "Andrey" },
-            { id: 3, name: "Sasha'" },
-            { id: 4, name: "Kolya'" },
-            { id: 5, name: "Nastya" },
-            { id: 6, name: "Dimych" },
-        ],
-        messagesData: [
-            { id: 1, message: 'hi' },
-            { id: 2, message: 'hi' },
-            { id: 3, message: 'hi' },
-            { id: 4, message: 'hi />' },
-            { id: 5, message: 'how are you' },
-            { id: 6, message: 'lol />' }
-        ]
+    _callSubscriber(state) {
+        // console.log('state changed');
     },
-    sidebar: {
-        friendsList: [
-            { id: 1, name: "Dimych" },
-            { id: 2, name: "Andrey" },
-            { id: 3, name: "Sasha'" },
-        ],
-        friendsData: []
+    addPost() {
+        let newPost = {
+            id: 4,
+            message: this._state.profilePage.newPostText,
+            likesCount: 0,
+        };
+        this._state.profilePage.postData.push(newPost);
+        this._state.profilePage.newPostText = '';
+        this._callSubscriber(this._state);
+    },
+    updateNewPostText(newText) {
+        this._state.profilePage.newPostText = newText;
+        this._callSubscriber(this._state);
+    },
+    subscribe(observer) { //observer-наблюдатель
+        this._callSubscriber = observer;
+    },
+    getState() {
+        return this._state;
     }
-}
 
-export let addPost = () => {
-    let newPost = {
-        id: 4,
-        message: state.profilePage.newPostText,
-        likesCount: 0,
-    };
-    state.profilePage.postData.push(newPost);
-    state.profilePage.newPostText = '';
-    renderEntireTree(state);
-}
+};
 
-export let updateNewPostText = (newText) => {
-    state.profilePage.newPostText = newText;
-    renderEntireTree(state);
-}
+export default store;
+window.store = store;
 
 
+// let state = {
+//     profilePage: {
+//         postData: [
+//             { id: 1, message: 'hi', likesCount: 11 },
+//             { id: 2, message: 'tooo', likesCount: 12 },
+//             { id: 3, message: 'one', likesCount: 1 },
+//         ],
+//         newPostText: 'hihihi'
+//     },
+//     dialogsPage: {
+//         dialogsData: [
+//             { id: 1, name: "Dimych" },
+//             { id: 2, name: "Andrey" },
+//             { id: 3, name: "Sasha'" },
+//             { id: 4, name: "Kolya'" },
+//             { id: 5, name: "Nastya" },
+//             { id: 6, name: "Dimych" },
+//         ],
+//         messagesData: [
+//             { id: 1, message: 'hi' },
+//             { id: 2, message: 'hi' },
+//             { id: 3, message: 'hi' },
+//             { id: 4, message: 'hi />' },
+//             { id: 5, message: 'how are you' },
+//             { id: 6, message: 'lol />' }
+//         ]
+//     },
+//     sidebar: {
+//         friendsList: [
+//             { id: 1, name: "Dimych" },
+//             { id: 2, name: "Andrey" },
+//             { id: 3, name: "Sasha'" },
+//         ],
+//         friendsData: []
+//     }
+// };
 
-export default state;
+// let renderEntireTree = (state) => {
+//     // console.log('state changed');
+// };
+
+// export const addPost = () => {
+//     let newPost = {
+//         id: 4,
+//         message: state.profilePage.newPostText,
+//         likesCount: 0,
+//     };
+//     state.profilePage.postData.push(newPost);
+//     state.profilePage.newPostText = '';
+//     renderEntireTree(state);
+// };
+
+// export const updateNewPostText = (newText) => {
+//     state.profilePage.newPostText = newText;
+//     renderEntireTree(state);
+// };
+
+// window.state = state;
+
+// export default state;
+
+// export const subscribe = (observer) => { //observer-наблюдатель
+//     renderEntireTree = observer;
+// }
 
 
 // let postData = [
