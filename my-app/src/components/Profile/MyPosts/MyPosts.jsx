@@ -16,13 +16,15 @@ const MyPosts = (props) => {
 
     let addPost = () => {
         // let text = newPostElement.current.value;
-        props.addPost();
+        // props.addPost();
+        props.dispatch({ type: 'ADD-POST' });
         // props.updateNewPostText('');
     };
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        // props.updateNewPostText(text);
+        props.dispatch({ type: 'NEW-TEXT-POST', newText: text })
     }
 
     return (

@@ -54,11 +54,26 @@ let store = {
         this._state.profilePage.newPostText = newText;
         this._callSubscriber(this._state);
     },
+
     subscribe(observer) { //observer-наблюдатель
         this._callSubscriber = observer;
     },
     getState() {
         return this._state;
+    },
+
+    dispatch(action) { //action-объект { type:'ADD-POST',}
+        switch (action.type) {
+            case 'ADD-POST':
+                this.addPost();
+                break;
+            case 'NEW-TEXT-POST':
+                this.updateNewPostText(action.newText);
+                break;
+            default:
+                alert('oyyyyps');
+        };
+
     }
 
 };
