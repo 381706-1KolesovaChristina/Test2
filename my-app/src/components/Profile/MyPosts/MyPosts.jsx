@@ -1,3 +1,4 @@
+import { addPostActionCreator, newTextPostActionCreator } from '../../../redux/State'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 import React from 'react'
@@ -8,23 +9,33 @@ import React from 'react'
 //     { id: 1, message: 'one', likesCount: 1 },
 // ];
 
+// let addPostActionCreator = () => {
+//     return {
+//         type: 'ADD-POST'
+//     }
+// }
 
+// let newTextPostActionCreator=(text)=>{
+//     return{ type: 'NEW-TEXT-POST', newText: text }
+// }
 
 const MyPosts = (props) => {
     let postsElement = props.postData.map(post => <Post message={post.message} likesCount={post.likesCount} />)
+
     let newPostElement = React.createRef();
 
     let addPost = () => {
         // let text = newPostElement.current.value;
         // props.addPost();
-        props.dispatch({ type: 'ADD-POST' });
+        props.dispatch(addPostActionCreator());
         // props.updateNewPostText('');
     };
 
     let onPostChange = () => {
-        let text = newPostElement.current.value;
+        let text = newPostElement.current.value; //current -ссылаемся на нативный html элемент
         // props.updateNewPostText(text);
-        props.dispatch({ type: 'NEW-TEXT-POST', newText: text })
+        // props.dispatch({ type: 'NEW-TEXT-POST', newText: text })
+        props.dispatch(newTextPostActionCreator(text));
     }
 
     return (
@@ -33,7 +44,7 @@ const MyPosts = (props) => {
             <div>
                 <textarea
                     onChange={onPostChange}
-                    ref={newPostElement}
+                    ref={newPostElement}//имя по которому ссылаемся на этот элемент
                     value={props.newPostText} />
                 <button onClick={addPost}>AddPost</button>
             </div>

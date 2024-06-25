@@ -26,7 +26,8 @@ let store = {
                 { id: 4, message: 'hi />' },
                 { id: 5, message: 'how are you' },
                 { id: 6, message: 'lol />' }
-            ]
+            ],
+            newMessegeText: 'hi!',
         },
         sidebar: {
             friendsList: [
@@ -55,6 +56,22 @@ let store = {
         this._callSubscriber(this._state);
     },
 
+    addMessege() {
+        let newMessege = {
+            id: 10,
+            message: this._state.dialogsPage.newMessegeText,
+        };
+        this._state.dialogsPage.messagesData.push(newMessege);
+        this._state.dialogsPage.newMessegeText = '';
+        this._callSubscriber(this._state);
+    },
+    updateNewMessegeText(newText) {
+        this._state.dialogsPage.newMessegeText = newText;
+        this._callSubscriber(this._state);
+    },
+
+
+
     subscribe(observer) { //observer-наблюдатель
         this._callSubscriber = observer;
     },
@@ -70,6 +87,12 @@ let store = {
             case 'NEW-TEXT-POST':
                 this.updateNewPostText(action.newText);
                 break;
+            case 'ADD-MESSEGE':
+                this.addMessege();
+                break;
+            case 'NEW-TEXT-MESSEGE':
+                this.updateNewMessegeText(action.newText);
+                break;
             default:
                 alert('oyyyyps');
         };
@@ -77,6 +100,32 @@ let store = {
     }
 
 };
+
+const ADD_POST = 'ADD-POST';
+const NEW_TEXT_POST = 'NEW-TEXT-POST';
+const ADD_MMESSEGE = 'ADD-MESSEGE'
+const NEW_TEXT_MESSEGE = 'NEW-TEXT-MESSEGE'
+
+// export const addPostActionCreator = () => {
+//     return {
+//         type: ADD_POST
+//     }
+// }
+
+// export const newTextPostActionCreator = (text) => {
+//     return { type: NEW_TEXT_POST, newText: text }
+// }
+
+export const addPostActionCreator = () => ({ type: ADD_POST })
+
+export const newTextPostActionCreator = (text) =>
+    ({ type: NEW_TEXT_POST, newText: text })
+
+export const addMessegeActionCreator = () => ({ type: ADD_MMESSEGE })
+
+export const newTextMessegeActionCreator = (text) =>
+    ({ type: NEW_TEXT_MESSEGE, newText: text })
+
 
 export default store;
 window.store = store;
