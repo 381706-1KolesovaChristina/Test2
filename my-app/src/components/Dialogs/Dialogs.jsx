@@ -28,14 +28,16 @@ const Dialogs = (props) => {
             </div>
             <div className={s.massages}>
                 {messagesElement}
+                <div>
+                    <textarea
+                        onChange={onMessegeChange}
+                        ref={newMessege}
+                        value={props.state.newMessegeText} />
+                    <button onClick={addMessege}>Sent</button>
+                </div>
+
             </div>
-            <div>
-                <textarea
-                    onChange={onMessegeChange}
-                    ref={newMessege}
-                    value={props.state.newMessegeText} />
-                <button onClick={addMessege}>Sent</button>
-            </div>
+
         </div>
     )
 }
