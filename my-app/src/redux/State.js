@@ -1,5 +1,9 @@
 // import renderEntireTree from "../render";
 
+import diaologsReduser from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import sidebarsReduser from "./sidebar-reducer";
+
 let store = {
     _state: {
         profilePage: {
@@ -41,36 +45,34 @@ let store = {
     _callSubscriber(state) {
         // console.log('state changed');
     },
-    addPost() {
-        let newPost = {
-            id: 4,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        };
-        this._state.profilePage.postData.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
+    // addPost() {
+    //     let newPost = {
+    //         id: 4,
+    //         message: this._state.profilePage.newPostText,
+    //         likesCount: 0,
+    //     };
+    //     this._state.profilePage.postData.push(newPost);
+    //     this._state.profilePage.newPostText = '';
+    //     this._callSubscriber(this._state);
+    // },
+    // updateNewPostText(newText) {
+    //     this._state.profilePage.newPostText = newText;
+    //     this._callSubscriber(this._state);
+    // },
 
-    addMessege() {
-        let newMessege = {
-            id: 10,
-            message: this._state.dialogsPage.newMessegeText,
-        };
-        this._state.dialogsPage.messagesData.push(newMessege);
-        this._state.dialogsPage.newMessegeText = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewMessegeText(newText) {
-        this._state.dialogsPage.newMessegeText = newText;
-        this._callSubscriber(this._state);
-    },
-
-
+    // addMessege() {
+    //     let newMessege = {
+    //         id: 10,
+    //         message: this._state.dialogsPage.newMessegeText,
+    //     };
+    //     this._state.dialogsPage.messagesData.push(newMessege);
+    //     this._state.dialogsPage.newMessegeText = '';
+    //     this._callSubscriber(this._state);
+    // },
+    // updateNewMessegeText(newText) {
+    //     this._state.dialogsPage.newMessegeText = newText;
+    //     this._callSubscriber(this._state);
+    // },
 
     subscribe(observer) { //observer-наблюдатель
         this._callSubscriber = observer;
@@ -80,31 +82,36 @@ let store = {
     },
 
     dispatch(action) { //action-объект { type:'ADD-POST',}
-        switch (action.type) {
-            case 'ADD-POST':
-                this.addPost();
-                break;
-            case 'NEW-TEXT-POST':
-                this.updateNewPostText(action.newText);
-                break;
-            case 'ADD-MESSEGE':
-                this.addMessege();
-                break;
-            case 'NEW-TEXT-MESSEGE':
-                this.updateNewMessegeText(action.newText);
-                break;
-            default:
-                alert('oyyyyps');
-        };
+        // switch (action.type) {
+        //     case 'ADD-POST':
+        //         this.addPost();
+        //         break;
+        //     case 'NEW-TEXT-POST':
+        //         this.updateNewPostText(action.newText);
+        //         break;
+        //     case 'ADD-MESSEGE':
+        //         this.addMessege();
+        //         break;
+        //     case 'NEW-TEXT-MESSEGE':
+        //         this.updateNewMessegeText(action.newText);
+        //         break;
+        //     default:
+        //         alert('oyyyyps');
+        // };
 
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = diaologsReduser(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarsReduser(this._state.sidebar, action);
+
+        this._callSubscriber(this._state);
     }
 
 };
 
-const ADD_POST = 'ADD-POST';
-const NEW_TEXT_POST = 'NEW-TEXT-POST';
-const ADD_MMESSEGE = 'ADD-MESSEGE'
-const NEW_TEXT_MESSEGE = 'NEW-TEXT-MESSEGE'
+// const ADD_POST = 'ADD-POST';
+// const NEW_TEXT_POST = 'NEW-TEXT-POST';
+// const ADD_MMESSEGE = 'ADD-MESSEGE'
+// const NEW_TEXT_MESSEGE = 'NEW-TEXT-MESSEGE'
 
 // export const addPostActionCreator = () => {
 //     return {
@@ -116,15 +123,15 @@ const NEW_TEXT_MESSEGE = 'NEW-TEXT-MESSEGE'
 //     return { type: NEW_TEXT_POST, newText: text }
 // }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
+// export const addPostActionCreator = () => ({ type: ADD_POST })
 
-export const newTextPostActionCreator = (text) =>
-    ({ type: NEW_TEXT_POST, newText: text })
+// export const newTextPostActionCreator = (text) =>
+//     ({ type: NEW_TEXT_POST, newText: text })
 
-export const addMessegeActionCreator = () => ({ type: ADD_MMESSEGE })
+// export const addMessegeActionCreator = () => ({ type: ADD_MMESSEGE })
 
-export const newTextMessegeActionCreator = (text) =>
-    ({ type: NEW_TEXT_MESSEGE, newText: text })
+// export const newTextMessegeActionCreator = (text) =>
+//     ({ type: NEW_TEXT_MESSEGE, newText: text })
 
 
 export default store;
