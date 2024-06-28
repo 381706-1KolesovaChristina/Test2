@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 // import { addPost } from './redux/State';
 // // import renderEntireTree from './render';
 // import { updateNewPostText } from './redux/State';
-import store from './redux/State'
+import store from './redux/redux-store'
 
 
 // addPost('ghjkl;hjkl');
@@ -21,6 +21,7 @@ import store from './redux/State'
 // };
 const root = ReactDOM.createRoot(document.getElementById('root')); //! вынесено из функции 
 let renderEntireTree = (state) => {
+    debugger;
     root.render(
         <React.StrictMode>
             <App state={state}
@@ -31,7 +32,11 @@ let renderEntireTree = (state) => {
 
 renderEntireTree(store.getState());
 
-store.subscribe(renderEntireTree);
+store.subscribe(() => {
+    let state = store.getState();
+    renderEntireTree(state);
+
+});
 
 // renderEntireTree();
 

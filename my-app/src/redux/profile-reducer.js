@@ -1,7 +1,16 @@
 const ADD_POST = 'ADD-POST';
 const NEW_TEXT_POST = 'NEW-TEXT-POST';
 
-const profileReducer = (state, action) => {
+let initialState = {
+    postData: [
+        { id: 1, message: 'hi', likesCount: 11 },
+        { id: 2, message: 'tooo', likesCount: 12 },
+        { id: 3, message: 'one', likesCount: 1 },
+    ],
+    newPostText: 'hihihi'
+};
+
+const profileReducer = (state = initialState, action) => {
     switch (action.type) { //! вынесли из state чтобы для каждого блока был reducer
         case ADD_POST:  //! те теперь за каждый блок отвечает своя небольшая ф-я а не одна огромная
             let newPost = {
