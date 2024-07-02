@@ -28,12 +28,19 @@ const diaologsReduser = (state = initialState, action) => {
                 id: 10,
                 message: state.newMessegeText,
             };
-            state.messagesData.push(newMessege);
-            state.newMessegeText = '';
-            return state;
+            // state.messagesData.push(newMessege);
+            // state.newMessegeText = '';
+            return {
+                ...state,
+                messagesData: [...state.messagesData, newMessege],
+                newMessegeText: ''
+            };
         case NEW_TEXT_MESSEGE:
-            state.newMessegeText = action.newText;
-            return state;
+            // state.newMessegeText = action.newText;
+            return {
+                ...state,
+                newMessegeText: action.newText
+            };
         default:
             // alert('oyyyyps');
             return state;

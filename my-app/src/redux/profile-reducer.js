@@ -10,7 +10,7 @@ let initialState = {
     newPostText: 'hihihi'
 };
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action) => { //* state тут как содержимое profilePage
     switch (action.type) { //! вынесли из state чтобы для каждого блока был reducer
         case ADD_POST:  //! те теперь за каждый блок отвечает своя небольшая ф-я а не одна огромная
             let newPost = {
@@ -18,12 +18,19 @@ const profileReducer = (state = initialState, action) => {
                 message: state.newPostText,
                 likesCount: 0,
             };
-            state.postData.push(newPost);
-            state.newPostText = '';
-            return state;
+            // state.postData.push(newPost);
+            // state.newPostText = '';
+            return {
+                ...state, //! spread(спред)-сиснтаксис тут позволет передать в ретурн копию state, при том свойства, которые уже были определены в state заменяются на новые указанные.
+                postData: [...state.postData, newPost], //! это позволяет избавиться от изменения исходного state и возвращает уже новый 
+                newPostText: ''
+            };
         case NEW_TEXT_POST:
-            state.newPostText = action.newText;
-            return state;
+            // state.newPostText = action.newText;
+            return {
+                ...state,
+                newPostText: action.newText
+            };
         default:
             // alert('oyyyyps');
             return state;
