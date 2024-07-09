@@ -33,7 +33,8 @@ let renderEntireTree = (state) => {
 renderEntireTree(store.getState());
 
 store.subscribe(() => {
-    let state = store.getState();
+    let state = store.getState(); //т.к. значение state не передается при обновлении store redux, 
+    //то нужно самим получить обновленное значение
     renderEntireTree(state);
 
 });
